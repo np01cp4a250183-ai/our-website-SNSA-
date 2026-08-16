@@ -22,30 +22,40 @@
   </div>
 </nav>
 
-<header class="page-header">
+<!-- Enhanced Header with corrected text -->
+<header class="page-header enhanced-header">
   <div class="container">
-    <h1>Shop All Products details</h1>
-    <p>Everything your pet needs, browsable by category. Explore nutritious food, fun toys, grooming essentials, health products. Shop by category and find everything you need to keep your furry friends happy, healthy and cared for.</p>
+    <h1>Shop All Products</h1>
+    <p>Everything your pet needs, browsable by category. Explore food, toys, grooming essentials, and more for your beloved pets.</p>
   </div>
 </header>
 
 <section class="section">
   <div class="container">
+    <!-- Filter bar with Emojis and Accessibility (aria-labels) -->
     <div class="filter-bar">
-      <button class="filter-btn active" data-category="All">All</button>
-      <button class="filter-btn" data-category="Dog Food">Dog Food</button>
-      <button class="filter-btn" data-category="Cat Food">Cat Food</button>
-      <button class="filter-btn" data-category="Treats">Treats</button>
-      <button class="filter-btn" data-category="Pet Toys">Pet Toys</button>
-      <button class="filter-btn" data-category="Pet Beds">Pet Beds</button>
-      <button class="filter-btn" data-category="Food Bowls">Food Bowls</button>
-      <button class="filter-btn" data-category="Collars & Leashes">Collars & Leashes</button>
-      <button class="filter-btn" data-category="Grooming Products">Grooming</button>
-      <button class="filter-btn" data-category="Pet Clothes">Pet Clothes</button>
-      <button class="filter-btn" data-category="Pet Accessories">Accessories</button>
+      <button class="filter-btn active" data-category="All" aria-label="Filter by All">🐾 All</button>
+      <button class="filter-btn" data-category="Dog Food" aria-label="Filter by Dog Food">🐶 Dog Food</button>
+      <button class="filter-btn" data-category="Cat Food" aria-label="Filter by Cat Food">🐱 Cat Food</button>
+      <button class="filter-btn" data-category="Treats" aria-label="Filter by Treats">🦴 Treats</button>
+      <button class="filter-btn" data-category="Pet Toys" aria-label="Filter by Pet Toys">🧸 Pet Toys</button>
+      <button class="filter-btn" data-category="Pet Beds" aria-label="Filter by Pet Beds">🛏️ Pet Beds</button>
+      <button class="filter-btn" data-category="Food Bowls" aria-label="Filter by Food Bowls">🥣 Food Bowls</button>
+      <button class="filter-btn" data-category="Collars & Leashes" aria-label="Filter by Collars & Leashes">🐕 Collars & Leashes</button>
+      <button class="filter-btn" data-category="Grooming Products" aria-label="Filter by Grooming">🧴 Grooming</button>
+      <button class="filter-btn" data-category="Pet Clothes" aria-label="Filter by Pet Clothes">👕 Pet Clothes</button>
+      <button class="filter-btn" data-category="Pet Accessories" aria-label="Filter by Accessories">🏠 Accessories</button>
     </div>
 
-    <div class="product-grid" id="product-grid"></div>
+    <div class="product-grid" id="product-grid">
+      <!-- JavaScript will inject products here -->
+    </div>
+    
+    <!-- Empty State Fallback (Hidden by default, shown by JS if a category is empty) -->
+    <div id="empty-state-message" class="empty-state" style="display: none;">
+      <h3>🐾 Oops! Nothing here right now.</h3>
+      <p>We are currently restocking this category. Check back soon!</p>
+    </div>
   </div>
 </section>
 
