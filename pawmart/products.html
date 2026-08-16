@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop — PawMart</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Products — PawMart</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -17,29 +17,47 @@
       <li><a href="about.html">About</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
-    <a href="cart.html" class="nav-cart">🛒 Cart</a>
+    <a href="cart.html" class="nav-cart">
+      🛒 Cart <span id="nav-cart-count" class="cart-badge">0</span>
+    </a>
     <button class="nav-toggle" aria-label="Toggle menu">☰</button>
   </div>
 </nav>
 
-<!-- Enhanced Header with corrected text -->
 <header class="page-header enhanced-header">
   <div class="container">
     <h1>Shop All Products</h1>
-    <p>Everything your pet needs, browsable by category. Explore food, toys, grooming essentials, and more for your beloved pets. Shop by category and find everything you need to keep furry friends happy, healthy and cared for.</p>
+    <p>Explore high-quality food, interactive toys, cozy beds, and grooming essentials to keep your furry friends happy and healthy.</p>
   </div>
 </header>
 
 <section class="section">
   <div class="container">
-    <!-- Filter bar with Emojis and Accessibility (aria-labels) -->
+    
+    <!-- Search & Sort Bar -->
+    <div class="shop-toolbar">
+      <div class="search-box">
+        <input type="text" id="search-input" placeholder="🔍 Search products (e.g., kibble, toy)..." aria-label="Search products">
+      </div>
+      <div class="sort-box">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" aria-label="Sort products">
+          <option value="default">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Filter Bar -->
     <div class="filter-bar">
       <button class="filter-btn active" data-category="All" aria-label="Filter by All">🐾 All</button>
       <button class="filter-btn" data-category="Dog Food" aria-label="Filter by Dog Food">🐶 Dog Food</button>
       <button class="filter-btn" data-category="Cat Food" aria-label="Filter by Cat Food">🐱 Cat Food</button>
       <button class="filter-btn" data-category="Treats" aria-label="Filter by Treats">🦴 Treats</button>
       <button class="filter-btn" data-category="Pet Toys" aria-label="Filter by Pet Toys">🧸 Pet Toys</button>
-      <button class="filter-btn" data-category="Pet Beds" aria-label="Filter by Pet Beds"> 🛏️Pet Beds</button>
+      <button class="filter-btn" data-category="Pet Beds" aria-label="Filter by Pet Beds">🛏️ Pet Beds</button>
       <button class="filter-btn" data-category="Food Bowls" aria-label="Filter by Food Bowls">🥣 Food Bowls</button>
       <button class="filter-btn" data-category="Collars & Leashes" aria-label="Filter by Collars & Leashes">🐕 Collars & Leashes</button>
       <button class="filter-btn" data-category="Grooming Products" aria-label="Filter by Grooming">🧴 Grooming</button>
@@ -47,14 +65,15 @@
       <button class="filter-btn" data-category="Pet Accessories" aria-label="Filter by Accessories">🏠 Accessories</button>
     </div>
 
+    <!-- Product Grid -->
     <div class="product-grid" id="product-grid">
-      <!-- JavaScript will inject products here -->
+      <!-- Injected by js/script.js -->
     </div>
     
-    <!-- Empty State Fallback (Hidden by default, shown by JS if a category is empty) -->
+    <!-- Empty State Fallback -->
     <div id="empty-state-message" class="empty-state" style="display: none;">
-      <h3>🐾 Oops! Nothing here right now. Check the other sections.</h3>
-      <p>We are currently restocking this category. Check back soon!</p>
+      <h3>🐾 Oops! No products found.</h3>
+      <p>Try adjusting your search query or category filter.</p>
     </div>
   </div>
 </section>
