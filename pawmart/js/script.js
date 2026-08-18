@@ -3,7 +3,7 @@
    ========================================================================== */
 
 // --------------------------------------------------------------------------
-// 1. Data Store
+// 1. Data Store & Global State
 // --------------------------------------------------------------------------
 const PRODUCTS = [
   { id: 1, name: "Chunky Kibble Dog Food (3kg)", category: "Dog Food", price: 1450, emoji: "🐶", rating: 4.9, reviews: 84, badge: "Bestseller", desc: "A protein-rich, grain-friendly kibble blend made for everyday energy and a shiny coat." },
@@ -20,30 +20,74 @@ const PRODUCTS = [
   { id: 12, name: "Feather Wand Cat Toy", category: "Pet Toys", price: 300, emoji: "🧸", rating: 4.7, reviews: 67, badge: "", desc: "Interactive feather wand keeping indoor cats active." }
 ];
 
+const state = {
+  category: "All",
+  searchQuery: "",
+  sortBy: "default"
+};
+
 // --------------------------------------------------------------------------
-// 2. Component Templates & Renderers
+// 2. LocalStorage Cart Manager & Toast Notifications
 // --------------------------------------------------------------------------
-
-/** Render product cards into a target container */
-function renderProductCards(products, containerId) {
-  const container = document.getElementById(containerId);
-  const emptyState = document.getElementById("empty-state-message");
-  if (!container) return;
-
-  if (!products || products.length === 0) {
-    container.innerHTML = "";
-    if (emptyState) emptyState.style.display = "block";
-    return;
-  }
-
-  if (emptyState) emptyState.style.display = "none";
-  container.innerHTML = products.map(createCardHTML).join("");
+function getCart() {
+  return JSON.parse(localStorage.getItem("pawmart_cart")) || [];
 }
 
-/** Generate HTML string for an individual product card */
+function saveCart(cart) {
+  localStorage.setItem("pawmart_cart", JSON.stringify(cart));
+  updateCartBadge();
+}
+
+function addToCart(productId, quantity = 1) {
+  const product = PRODUCTS.find(p => p.id === productId);
+  if (!product) return;
+
+  const cart = getCart();
+  const existingIndex = cart.findIndex(item => item.id === productId);
+
+  if (existingIndex > -1) {
+    cart[existingIndex].qty += quantity;
+  } else {
+    cart.push({ id: product.id, name: product.name, price: product.price, emoji: product.emoji, qty: quantity });
+  }
+
+  saveCart(cart);
+  showToast(`Added <strong>${quantity}x ${product.name}</strong> to cart! 🛒`);
+}
+
+function updateCartBadge() {
+  const cart = getCart();
+  const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+  const badge = document.getElementById("nav-cart-count");
+  if (badge) badge.textContent = totalItems;
+}
+
+function showToast(message) {
+  let container = document.getElementById("toast-container");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toast-container";
+    container.className = "toast-container";
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement("div");
+  toast.className = "toast-message";
+  toast.innerHTML = message;
+  container.appendChild(toast);
+
+  setTimeout(() => toast.classList.add("visible"), 10);
+  setTimeout(() => {
+    toast.classList.remove("visible");
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// --------------------------------------------------------------------------
+// 3. Renderers & Components
+// --------------------------------------------------------------------------
 function createCardHTML(p) {
   const badgeHTML = p.badge ? `<span class="product-badge">${p.badge}</span>` : "";
-  const safeName = p.name.replace(/'/g, "\\'");
 
   return `
     <article class="product-card" data-category="${p.category}">
@@ -67,7 +111,7 @@ function createCardHTML(p) {
         </a>
 
         <div class="product-price">Rs ${p.price}</div>
-        <button class="btn btn-primary btn-small" onclick="addToCart('${safeName}', ${p.price})">
+        <button class="btn btn-primary btn-small" onclick="addToCart(${p.id})">
           Add to Cart 🛒
         </button>
       </div>
@@ -75,60 +119,102 @@ function createCardHTML(p) {
   `;
 }
 
-// --------------------------------------------------------------------------
-// 3. Cart & Wishlist Actions
-// --------------------------------------------------------------------------
+function renderProductCards(products, containerId) {
+  const container = document.getElementById(containerId);
+  const emptyState = document.getElementById("empty-state-message");
+  if (!container) return;
 
-function addToCart(name, price) {
-  alert(`${name} added to cart! (Rs ${price})`);
+  if (!products || products.length === 0) {
+    container.innerHTML = "";
+    if (emptyState) emptyState.style.display = "block";
+    return;
+  }
+
+  if (emptyState) emptyState.style.display = "none";
+  container.innerHTML = products.map(createCardHTML).join("");
 }
 
-function addProductDetailToCart(name, price) {
-  const qty = document.getElementById("qty")?.value || 1;
-  alert(`${qty} x ${name} added to cart! (Rs ${price * qty})`);
+// --------------------------------------------------------------------------
+// 4. Search, Filtering, and Sorting Pipeline
+// --------------------------------------------------------------------------
+function getProcessedProducts() {
+  return PRODUCTS.filter(p => {
+    const matchesCategory = state.category === "All" || p.category === state.category;
+    const matchesSearch = p.name.toLowerCase().includes(state.searchQuery.toLowerCase()) || 
+                          p.desc.toLowerCase().includes(state.searchQuery.toLowerCase());
+    return matchesCategory && matchesSearch;
+  }).sort((a, b) => {
+    if (state.sortBy === "price-low") return a.price - b.price;
+    if (state.sortBy === "price-high") return b.price - a.price;
+    if (state.sortBy === "rating") return b.rating - a.rating;
+    return 0;
+  });
 }
 
+function updateShopView() {
+  const processed = getProcessedProducts();
+  renderProductCards(processed, "product-grid");
+}
+
+function initShopControls() {
+  const filterBar = document.querySelector(".filter-bar");
+  const searchInput = document.getElementById("search-input");
+  const sortSelect = document.getElementById("sort-select");
+
+  if (filterBar) {
+    filterBar.addEventListener("click", (e) => {
+      const btn = e.target.closest(".filter-btn");
+      if (!btn) return;
+
+      filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      state.category = btn.dataset.category;
+      updateShopView();
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      state.searchQuery = e.target.value.trim();
+      updateShopView();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      state.sortBy = e.target.value;
+      updateShopView();
+    });
+  }
+}
+
+// --------------------------------------------------------------------------
+// 5. General Page Features & Details
+// --------------------------------------------------------------------------
 function toggleWishlist(btn) {
   btn.classList.toggle("active");
+  const isWishlisted = btn.classList.contains("active");
+  showToast(isWishlisted ? "Item added to your wishlist! ❤️" : "Item removed from wishlist.");
 }
 
 function changeQty(delta) {
   const qtyInput = document.getElementById("qty");
   if (!qtyInput) return;
-  const newValue = Math.max(1, parseInt(qtyInput.value || 1) + delta);
-  qtyInput.value = newValue;
+  qtyInput.value = Math.max(1, parseInt(qtyInput.value || 1) + delta);
 }
 
-// --------------------------------------------------------------------------
-// 4. Feature Modules
-// --------------------------------------------------------------------------
+function addProductDetailToCart(productId) {
+  const qty = parseInt(document.getElementById("qty")?.value || 1);
+  addToCart(productId, qty);
+}
 
 function initNavToggle() {
   const toggle = document.querySelector(".nav-toggle");
   const navbar = document.querySelector(".navbar");
-  if (!toggle || !navbar) return;
-
-  toggle.addEventListener("click", () => navbar.classList.toggle("open"));
-}
-
-function initShopFilters() {
-  const filterBar = document.querySelector(".filter-bar");
-  if (!filterBar) return;
-
-  filterBar.addEventListener("click", (e) => {
-    const btn = e.target.closest(".filter-btn");
-    if (!btn) return;
-
-    filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const category = btn.dataset.category;
-    const filtered = category === "All" 
-      ? PRODUCTS 
-      : PRODUCTS.filter(p => p.category === category);
-
-    renderProductCards(filtered, "product-grid");
-  });
+  if (toggle && navbar) {
+    toggle.addEventListener("click", () => navbar.classList.toggle("open"));
+  }
 }
 
 function initProductDetails() {
@@ -157,35 +243,27 @@ function initProductDetails() {
           <button type="button" onclick="changeQty(1)">+</button>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="addProductDetailToCart('${product.name.replace(/'/g, "\\'")}', ${product.price})">
+      <button class="btn btn-primary" onclick="addProductDetailToCart(${product.id})">
         Add to Cart 🛒
       </button>
     </div>
   `;
 }
 
-function initFaqAccordion() {
-  document.querySelectorAll(".faq-item").forEach(item => {
-    item.querySelector(".faq-question")?.addEventListener("click", () => {
-      item.classList.toggle("open");
-    });
-  });
-}
-
 // --------------------------------------------------------------------------
-// 5. Application Entry Point
+// 6. Application Entry Point
 // --------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", () => {
   initNavToggle();
-  initShopFilters();
+  initShopControls();
   initProductDetails();
-  initFaqAccordion();
+  updateCartBadge();
 
   if (document.getElementById("featured-grid")) {
     renderProductCards(PRODUCTS.slice(0, 4), "featured-grid");
   }
 
   if (document.getElementById("product-grid") && !document.getElementById("product-detail-container")) {
-    renderProductCards(PRODUCTS, "product-grid");
+    updateShopView();
   }
 });
