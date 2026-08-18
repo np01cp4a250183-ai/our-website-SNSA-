@@ -160,3 +160,18 @@ img, svg { max-width: 100%; display: block; }
 
 .text-center { text-align: center; }
 .mt-24 { margin-top: 24px; }
+
+.team-avatar {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  overflow: hidden; /* Crops images to the circular border */
+  background-color: var(--color-secondary);
+}
+
+.team-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Prevents stretching and centers the photo */
+}
