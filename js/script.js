@@ -1,9 +1,7 @@
-/* ============================================
-   PawMart — Shared JavaScript
-   ============================================ */
+
 
 const PRODUCTS = [
-  { id: 1, name: "Chunky Kibble Dog Food (3kg)", category: "Dog Food", price: 1450, emoji: "🐶", desc: "A protein-rich, grain-friendly kibble blend made for everyday energy and a shiny coat. Great for medium to large breed dogs." },
+  { id: 1, name: "Chunky Kibble Dog Food (3kg)", category: "Dog Food", price: 1450, image: "dog.png", desc: "A protein-rich, grain-friendly kibble blend made for everyday energy and a shiny coat. Great for medium to large breed dogs." },
   { id: 2, name: "Salmon & Rice Cat Food (2kg)", category: "Cat Food", price: 1250, emoji: "🐱", desc: "Real salmon and rice recipe that's gentle on sensitive tummies, with added taurine for healthy eyes and heart." },
   { id: 3, name: "Crunchy Training Treats", category: "Treats", price: 350, emoji: "🦴", desc: "Bite-sized, low-calorie treats that are perfect for training sessions or just a little extra love." },
   { id: 4, name: "Squeaky Bone Chew Toy", category: "Pet Toys", price: 420, emoji: "🧸", desc: "A durable rubber chew toy with a built-in squeaker, made to survive even the most enthusiastic chewers." },
