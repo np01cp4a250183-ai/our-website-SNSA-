@@ -52,5 +52,52 @@ function renderProductCards(products, containerId) {
     </div>
   `).join("");
 }
+function initShopFilters() {
+  const filterBar = document.querySelector(".filter-bar");
+  if (!filterBar) return;
+
+  filterBar.addEventListener("click", (e) => {
+    const btn = e.target.closest(".filter-btn");
+    if (!btn) return;
+
+    filterBar.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    const category = btn.dataset.category;
+    const filtered = category === "All" ? PRODUCTS : PRODUCTS.filter(p => p.category === category);
+    renderProductCards(filtered, "product-grid");
+  });
+}
+function initProductDetails() {
+  const detailContainer = document.getElementById("product-detail-container");
+  if (!detailContainer) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id")) || PRODUCTS[0].id;
+  const product = PRODUCTS.find(p => p.id === id) || PRODUCTS[0];
+
+  document.title = product.name + " — PawMart";
+
+  detailContainer.innerHTML = `
+    <div class="product-detail-image">${product.emoji}</div>
+    <div class="product-detail-info">
+      <span class="product-cat">${product.category}</span>
+      <h1>${product.name}</h1>
+      <div class="product-detail-price">Rs ${product.price}</div>
+      <p class="product-detail-desc">${product.desc}</p>
+      <div class="qty-row">
+        <label for="qty">Quantity</label>
+        <div class="qty-control">
+          <button type="button" onclick="changeQty(-1)">−</button>
+          <input type="text" id="qty" value="1" readonly>
+          <button type="button" onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addProductDetailToCart('${product.name.replace(/'/g, "\\'")}', ${product.price})">
+        Add to Cart
+      </button>
+    </div>
+  `;
+}
 
 
