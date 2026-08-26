@@ -4,7 +4,20 @@
 
 const PRODUCTS = [
   { id: 1, name: "Chunky Kibble Dog Food (3kg)", category: "Dog Food", price: 1450, emoji: "🐶", desc: "A protein-rich, grain-friendly kibble blend made for everyday energy and a shiny coat. Great for medium to large breed dogs." },
+  { id: 2, name: "Salmon & Rice Cat Food (2kg)", category: "Cat Food", price: 1250, emoji: "🐱", desc: "Real salmon and rice recipe that's gentle on sensitive tummies, with added taurine for healthy eyes and heart." },
+  { id: 3, name: "Crunchy Training Treats", category: "Treats", price: 350, emoji: "🦴", desc: "Bite-sized, low-calorie treats that are perfect for training sessions or just a little extra love." },
+  { id: 4, name: "Squeaky Bone Chew Toy", category: "Pet Toys", price: 420, emoji: "🧸", desc: "A durable rubber chew toy with a built-in squeaker, made to survive even the most enthusiastic chewers." },
+  { id: 5, name: "Cloud Comfort Pet Bed", category: "Pet Beds", price: 2600, emoji: "🛏️", desc: "Plush, machine-washable bed with raised edges so your pet has something soft to curl up against." },
+  { id: 6, name: "Stainless Steel Food Bowl Set", category: "Food Bowls", price: 680, emoji: "🥣", desc: "A rust-resistant, non-slip bowl duo for food and water, easy to clean after every meal." },
+  { id: 7, name: "Adjustable Collar & Leash Set", category: "Collars & Leashes", price: 950, emoji: "🐕", desc: "A matching collar and 1.2m leash set with sturdy clips, adjustable for a comfortable, secure fit." },
+  { id: 8, name: "Oatmeal Shampoo for Sensitive Skin", category: "Grooming Products", price: 590, emoji: "🧴", desc: "A gentle, tear-free oatmeal shampoo that soothes itchy skin and leaves fur soft and fresh." },
+  { id: 9, name: "Cozy Knit Pet Sweater", category: "Pet Clothes", price: 780, emoji: "👕", desc: "A warm knit sweater for chilly evenings and cold-weather walks, available in three sizes." },
+  { id: 10, name: "Travel Carrier Backpack", category: "Pet Accessories", price: 3200, emoji: "🏠", desc: "A ventilated, comfortable carrier backpack for trips to the vet, the park, or on the road." },
+  { id: 11, name: "Grain-Free Puppy Food (1.5kg)", category: "Dog Food", price: 1100, emoji: "🐶", desc: "Specially formulated for growing puppies, with DHA to support healthy brain and eye development." },
+  { id: 12, name: "Feather Wand Cat Toy", category: "Pet Toys", price: 300, emoji: "🧸", desc: "An interactive feather wand that keeps indoor cats active, playful, and entertained." },
 ];
+
+
 // Add to Cart — kept intentionally simple, no backend, no storage
 function addToCart(name, price) {
   alert(name + " added to cart! (Rs " + price + ")");
