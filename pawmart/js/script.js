@@ -112,4 +112,29 @@ function addProductDetailToCart(name, price) {
   alert(qty + " x " + name + " added to cart! (Rs " + (price * qty) + ")");
 }
 
+function initFaqAccordion() {
+  document.querySelectorAll(".faq-item").forEach(item => {
+    item.querySelector(".faq-question").addEventListener("click", () => {
+      item.classList.toggle("open");
+    });
+  });
+}
 
+function handleContactSubmit(event) {
+  event.preventDefault();
+  alert("Thanks for reaching out! We'll get back to you soon. 🐾");
+  event.target.reset();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  initNavToggle();
+  initShopFilters();
+  initProductDetails();
+  initFaqAccordion();
+
+  renderProductCards(PRODUCTS.slice(0, 4), "featured-grid");
+
+  if (document.getElementById("product-grid") && !document.getElementById("product-detail-container")) {
+    renderProductCards(PRODUCTS, "product-grid");
+  }
+});
