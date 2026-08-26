@@ -99,5 +99,17 @@ function initProductDetails() {
     </div>
   `;
 }
+function changeQty(delta) {
+  const qtyInput = document.getElementById("qty");
+  if (!qtyInput) return;
+  let value = parseInt(qtyInput.value) + delta;
+  if (value < 1) value = 1;
+  qtyInput.value = value;
+}
+
+function addProductDetailToCart(name, price) {
+  const qty = document.getElementById("qty").value;
+  alert(qty + " x " + name + " added to cart! (Rs " + (price * qty) + ")");
+}
 
 
