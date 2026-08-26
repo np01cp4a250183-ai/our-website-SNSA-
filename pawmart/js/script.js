@@ -36,4 +36,21 @@ function renderProductCards(products, containerId) {
     container.innerHTML = '<p class="empty-note">No products found in this category yet.</p>';
     return;
   }
+  container.innerHTML = products.map(p => `
+    <div class="product-card" data-category="${p.category}">
+      <div class="product-thumb">${p.emoji}</div>
+      <div class="product-info">
+        <span class="product-cat">${p.category}</span>
+        <a class="product-name-link" href="product-details.html?id=${p.id}">
+          <h3 class="product-name">${p.name}</h3>
+        </a>
+        <span class="product-price">Rs ${p.price}</span>
+        <button class="btn btn-primary btn-small" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price})">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
 
