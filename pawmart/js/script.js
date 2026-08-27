@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+/* ============================================
+   PawMart — Shared JavaScript
+   ============================================ */
+=======
+>>>>>>> origin/main
 
 const PRODUCTS = [
   { id: 1, name: "Chunky Kibble Dog Food (3kg)", category: "Dog Food", price: 1450, emoji: "🐶", desc: "A protein-rich, grain-friendly kibble blend made for everyday energy and a shiny coat. Great for medium to large breed dogs." },
@@ -14,18 +20,29 @@ const PRODUCTS = [
   { id: 12, name: "Feather Wand Cat Toy", category: "Pet Toys", price: 300, emoji: "🧸", desc: "An interactive feather wand that keeps indoor cats active, playful, and entertained." },
 ];
 
+<<<<<<< HEAD
+
+// Add to Cart — kept intentionally simple, no backend, no storage
+function addToCart(name, price) {
+  alert(name + " added to cart! (Rs " + price + ")");
+}
+=======
 // Add to Cart — kept intentionally simple, no backend, no storage
 function addToCart(name, price) {
   alert(name + " added to cart! (Rs." + price + ")");
 }
 
+>>>>>>> origin/main
 function initNavToggle() {
   const toggle = document.querySelector(".nav-toggle");
   const navbar = document.querySelector(".navbar");
   if (!toggle || !navbar) return;
   toggle.addEventListener("click", () => navbar.classList.toggle("open"));
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 function renderProductCards(products, containerId) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -34,7 +51,10 @@ function renderProductCards(products, containerId) {
     container.innerHTML = '<p class="empty-note">No products found in this category yet.</p>';
     return;
   }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
   container.innerHTML = products.map(p => `
     <div class="product-card" data-category="${p.category}">
       <div class="product-thumb">${p.emoji}</div>
@@ -43,7 +63,11 @@ function renderProductCards(products, containerId) {
         <a class="product-name-link" href="product-details.html?id=${p.id}">
           <h3 class="product-name">${p.name}</h3>
         </a>
+<<<<<<< HEAD
+        <span class="product-price">Rs ${p.price}</span>
+=======
         <span class="product-price">Rs.${p.price}</span>
+>>>>>>> origin/main
         <button class="btn btn-primary btn-small" onclick="addToCart('${p.name.replace(/'/g, "\\'")}', ${p.price})">
           Add to Cart
         </button>
@@ -51,7 +75,10 @@ function renderProductCards(products, containerId) {
     </div>
   `).join("");
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 function initShopFilters() {
   const filterBar = document.querySelector(".filter-bar");
   if (!filterBar) return;
@@ -68,7 +95,10 @@ function initShopFilters() {
     renderProductCards(filtered, "product-grid");
   });
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 function initProductDetails() {
   const detailContainer = document.getElementById("product-detail-container");
   if (!detailContainer) return;
@@ -84,7 +114,11 @@ function initProductDetails() {
     <div class="product-detail-info">
       <span class="product-cat">${product.category}</span>
       <h1>${product.name}</h1>
+<<<<<<< HEAD
+      <div class="product-detail-price">Rs ${product.price}</div>
+=======
       <div class="product-detail-price">Rs.${product.price}</div>
+>>>>>>> origin/main
       <p class="product-detail-desc">${product.desc}</p>
       <div class="qty-row">
         <label for="qty">Quantity</label>
@@ -100,7 +134,10 @@ function initProductDetails() {
     </div>
   `;
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/main
 function changeQty(delta) {
   const qtyInput = document.getElementById("qty");
   if (!qtyInput) return;
@@ -111,7 +148,11 @@ function changeQty(delta) {
 
 function addProductDetailToCart(name, price) {
   const qty = document.getElementById("qty").value;
+<<<<<<< HEAD
+  alert(qty + " x " + name + " added to cart! (Rs " + (price * qty) + ")");
+=======
   alert(qty + " x " + name + " added to cart! (Rs." + (price * qty) + ")");
+>>>>>>> origin/main
 }
 
 function initFaqAccordion() {
