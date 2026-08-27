@@ -160,3 +160,60 @@ img, svg { max-width: 100%; display: block; }
 
 .text-center { text-align: center; }
 .mt-24 { margin-top: 24px; }
+
+
+.about-story {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.story-photos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.story-photos .story-image {
+    width: 85%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+}
+
+.about-story-copy {
+    padding: 10px;
+}
+
+.about-story-copy p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .about-story {
+        grid-template-columns: 1fr;
+    }
+
+    .story-photos .story-image {
+        height: 150px;
+    }
+}
+
+
+.team-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 15px;
+}
+
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
