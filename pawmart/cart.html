@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart — PawMart</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="container">
+    <a href="index.html" class="logo">🐾 PawMart</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="products.html">Shop</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="cart.html" class="nav-cart active">🛒 Cart</a>
+    <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <h1>Your Cart</h1>
+    <p>Here's a sample of what a full cart would look like.</p>
+  </div>
+</header>
+
+<section class="section">
+  <div class="container">
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="cart-product">
+              <span class="cart-thumb">🐶</span>
+              <span>Chunky Kibble Dog Food (3kg)</span>
+            </div>
+          </td>
+          <td>₹1450</td>
+          <td><input type="number" class="cart-qty" value="1" min="1"></td>
+          <td>₹1450</td>
+          <td><span class="remove-link" onclick="this.closest('tr').remove()">Remove</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cart-product">
+              <span class="cart-thumb">🧸</span>
+              <span>Squeaky Bone Chew Toy</span>
+            </div>
+          </td>
+          <td>₹420</td>
+          <td><input type="number" class="cart-qty" value="2" min="1"></td>
+          <td>₹840</td>
+          <td><span class="remove-link" onclick="this.closest('tr').remove()">Remove</span></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="cart-product">
+              <span class="cart-thumb">🥣</span>
+              <span>Stainless Steel Food Bowl Set</span>
+            </div>
+          </td>
+          <td>₹680</td>
+          <td><input type="number" class="cart-qty" value="1" min="1"></td>
+          <td>₹680</td>
+          <td><span class="remove-link" onclick="this.closest('tr').remove()">Remove</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal</span><span>₹2970</span></div>
+      <div class="cart-summary-row"><span>Delivery</span><span>₹100</span></div>
+      <div class="cart-summary-row total"><span>Total</span><span>₹3070</span></div>
+      <button class="btn btn-primary" onclick="alert('Thanks for shopping with PawMart! 🐾')">Checkout</button>
+      <a href="products.html" class="btn btn-outline text-center mt-24">Continue Shopping</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div>
+      <h4>🐾 PawMart</h4>
+      <p>Everything your pet needs, all in one place.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Shop</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Categories</h4>
+      <ul>
+        <li><a href="products.html">Dog Food</a></li>
+        <li><a href="products.html">Cat Food</a></li>
+        <li><a href="products.html">Pet Toys</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p>hello@pawmart.com</p>
+      <p>+977 98-0000-0000</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 PawMart. All rights reserved.</div>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
