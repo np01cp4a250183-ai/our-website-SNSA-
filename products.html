@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Details — PawMart</title>
+<title>Shop — PawMart</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,11 +22,30 @@
   </div>
 </nav>
 
+<header class="page-header">
+  <div class="container">
+    <h1>Shop All Products</h1>
+    <p>Everything your pet needs, browsable by category.</p>
+  </div>
+</header>
+
 <section class="section">
   <div class="container">
-    <div class="product-detail" id="product-detail-container">
-      <!-- Filled in by js/script.js based on ?id= in the URL -->
+    <div class="filter-bar">
+      <button class="filter-btn active" data-category="All">All</button>
+      <button class="filter-btn" data-category="Dog Food">Dog Food</button>
+      <button class="filter-btn" data-category="Cat Food">Cat Food</button>
+      <button class="filter-btn" data-category="Treats">Treats</button>
+      <button class="filter-btn" data-category="Pet Toys">Pet Toys</button>
+      <button class="filter-btn" data-category="Pet Beds">Pet Beds</button>
+      <button class="filter-btn" data-category="Food Bowls">Food Bowls</button>
+      <button class="filter-btn" data-category="Collars & Leashes">Collars & Leashes</button>
+      <button class="filter-btn" data-category="Grooming Products">Grooming</button>
+      <button class="filter-btn" data-category="Pet Clothes">Pet Clothes</button>
+      <button class="filter-btn" data-category="Pet Accessories">Accessories</button>
     </div>
+
+    <div class="product-grid" id="product-grid"></div>
   </div>
 </section>
 
@@ -64,8 +83,4 @@
 
 <script src="js/script.js"></script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> origin/main
